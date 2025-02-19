@@ -12,11 +12,13 @@ public class PlayerController : BaseController
     }
     protected override void HandleAction()
     {
+        //플레이어 이동 관련 입력
         base.HandleAction();
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
         movementDirection = new Vector2(horizontal, vertical).normalized;
 
+        //플레이어 시선 처리 관련 마우스
         Vector2 mousePosition = Input.mousePosition;
         Vector2 worldPos = camera.ScreenToWorldPoint(mousePosition);
         lookDirection = (worldPos - (Vector2)transform.position);

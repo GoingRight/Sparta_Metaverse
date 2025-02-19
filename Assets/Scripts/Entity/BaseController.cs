@@ -43,18 +43,18 @@ public class BaseController : MonoBehaviour
 
     protected virtual void HandleAction()
     {
-
+        
     }
 
-    private void Movement(Vector2 direction)//매개변수로 movementDirection이 들어감
+    private void Movement(Vector2 direction)//direction에 movementDirection이 들어감
     {
-        direction = direction * 5;//나중에 스탯의 스피드로 바꿀 것
+        direction = direction * 5;//나중에 스텟 스피드로 대체
 
         _rigidbody.velocity = direction;
         animationHandler.Move(direction);
     }
 
-    private void Rotate(Vector2 direction)//매개변수로 lookDirection이 들어감
+    private void Rotate(Vector2 direction)//direction에 lookDirection이 들어감
     {
         float theta = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         bool isLeft = Mathf.Abs(theta) > 90f;
