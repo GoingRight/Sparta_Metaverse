@@ -7,6 +7,7 @@ public class NPCController : MonoBehaviour
     [SerializeField] private SpriteRenderer characterRender;
     [SerializeField] private Transform target;
     [SerializeField] private GameObject TeachInterActiveKey;
+    [SerializeField] private GameObject ChatUI;
     private Vector2 lookDirection = Vector2.zero;
     public Vector2 LookDirection { get { return lookDirection; } }
 
@@ -50,10 +51,12 @@ public class NPCController : MonoBehaviour
         yield return new WaitUntil(()=>Input.GetKeyDown(KeyCode.F));//조건이 만족될때까지 대기
         TeachInterActiveKey.SetActive(false);
         //UI 띄우기
+        ChatUI.SetActive(true);
         Debug.Log("켜졌습니다");
         yield return new WaitUntil(() => Input.GetKeyUp(KeyCode.F));
         yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.F));
         //UI 꺼주기
+        ChatUI.SetActive(false);
         Debug.Log("꺼졌습니다");
     }
 
@@ -64,6 +67,7 @@ public class NPCController : MonoBehaviour
         {
             StopCoroutine(InteractionCoroutine);
             TeachInterActiveKey.SetActive(false);
+            ChatUI.SetActive(false);
         }
     }
 }
