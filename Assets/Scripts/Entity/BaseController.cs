@@ -31,12 +31,15 @@ public class BaseController : MonoBehaviour
     protected virtual void Update()
     {
         HandleAction();
-        Rotate(lookDirection);
+        //Rotate(lookDirection);
     }
 
     protected virtual void FixedUpdate()
     {
-        Movement(movementDirection);
+
+            Movement(movementDirection);
+
+
     }
 
     protected virtual void HandleAction()
