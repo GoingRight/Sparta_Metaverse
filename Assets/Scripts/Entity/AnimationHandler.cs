@@ -5,6 +5,7 @@ using UnityEngine.Tilemaps;
 
 public class AnimationHandler : MonoBehaviour
 {
+    //테스트
     protected Animator animator;
 
     private void Awake()

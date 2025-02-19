@@ -27,11 +27,10 @@ public class BaseController : MonoBehaviour
     {
 
     }
-
     protected virtual void Update()
     {
         HandleAction();
-        //Rotate(lookDirection);
+        Rotate(lookDirection);
     }
 
     protected virtual void FixedUpdate()
@@ -47,15 +46,15 @@ public class BaseController : MonoBehaviour
 
     }
 
-    private void Movement(Vector2 direction)//¸Å°³º¯¼ö·Î movementDirectionÀÌ µé¾î°¨
+    private void Movement(Vector2 direction)//ë§¤ê°œë³€ìˆ˜ë¡œ movementDirectionì´ ë“¤ì–´ê°
     {
-        direction = direction * 5;//³ªÁß¿¡ ½ºÅÈÀÇ ½ºÇÇµå·Î ¹Ù²Ü °Í
+        direction = direction * 5;//ë‚˜ì¤‘ì— ìŠ¤íƒ¯ì˜ ìŠ¤í”¼ë“œë¡œ ë°”ê¿€ ê²ƒã…‡ã…‡ã…‡
 
         _rigidbody.velocity = direction;
         animationHandler.Move(direction);
     }
 
-    private void Rotate(Vector2 direction)//¸Å°³º¯¼ö·Î lookDirectionÀÌ µé¾î°¨
+    private void Rotate(Vector2 direction)//ë§¤ê°œë³€ìˆ˜ë¡œ lookDirectionì´ ë“¤ì–´ê°
     {
         float theta = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         bool isLeft = Mathf.Abs(theta) > 90f;
