@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class PlayerController : BaseController
 {
+    protected override void Awake()
+    {
+        base.Awake();
+    }
     protected override void HandleAction()
     {
         base.HandleAction();
