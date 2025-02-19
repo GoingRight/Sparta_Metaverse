@@ -48,7 +48,7 @@ public class BaseController : MonoBehaviour
 
     private void Movement(Vector2 direction)//매개변수로 movementDirection이 들어감
     {
-        direction = direction * 5;//나중에 스탯의 스피드로 바꿀 것ㅇㅇㅇ
+        direction = direction * 5;//나중에 스탯의 스피드로 바꿀 것
 
         _rigidbody.velocity = direction;
         animationHandler.Move(direction);
