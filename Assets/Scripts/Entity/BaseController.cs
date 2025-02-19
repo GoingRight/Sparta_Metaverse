@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BaseController : MonoBehaviour
 {
@@ -15,12 +16,30 @@ public class BaseController : MonoBehaviour
     protected Vector2 lookDirection = Vector2.zero;
     public Vector2 LookDirection { get { return lookDirection; } }
 
+    public WeaponHandler WeaponPrefab;
+    protected WeaponHandler weaponHandler;
+
+    protected bool isAttacking;
+
     protected AnimationHandler animationHandler;
 
     protected virtual void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
         animationHandler = GetComponent<AnimationHandler>();
+
+        if(SceneManager.GetActiveScene().buildIndex == 1)//1 == MiniGameScene
+        {
+            if (WeaponPrefab != null)
+            {
+                weaponHandler = Instantiate(WeaponPrefab, weaponPivot);
+            }
+            else
+            {
+                Debug.LogWarning("WaponPrefab is NULL");
+            }
+        } 
+
     }
 
     protected virtual void Start()

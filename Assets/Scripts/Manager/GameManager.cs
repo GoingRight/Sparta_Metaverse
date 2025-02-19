@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
     {
         get { return instance; }
     }
+    private int killCount = 0;
+    public int KillCount { get { return killCount; } set { killCount = value;} }
 
     private void Awake()
     {
@@ -18,7 +20,16 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            Destroy(this.gameObject);
+            if(instance != this)
+            {
+                Destroy(gameObject);
+            }
         }
+        DontDestroyOnLoad(gameObject);
+    }
+
+    public void GameOver()
+    {
+
     }
 }
