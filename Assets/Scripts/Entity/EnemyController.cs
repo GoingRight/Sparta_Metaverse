@@ -6,9 +6,10 @@ public class EnemyController : BaseController
 {
     private EnemyManager enemyManager;
     [SerializeField]private Transform target;
-
+    private GameManager gameManager;
     public void Init(EnemyManager enemyManager,Transform target)
     {
+        this.gameManager = GameManager.Instance;
         this.enemyManager = enemyManager;
         this.target = target;
     }
@@ -45,7 +46,6 @@ public class EnemyController : BaseController
                     (1 << LayerMask.NameToLayer("Level")) | layerMaskTarget);
             if (hit.collider != null && layerMaskTarget == (layerMaskTarget | (1 << hit.collider.gameObject.layer)))
             {
-                Debug.Log("때립니다.");
                 isAttacking = true;
             }
 
@@ -58,6 +58,7 @@ public class EnemyController : BaseController
     public override void Death()
     {
         base.Death();
-        GameManager.Instance.KillCount++;
+        gameManager.KillCountPlus();
+        
     }
 }

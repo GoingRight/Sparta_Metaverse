@@ -1,27 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.XR;
+using UnityEngine.UI;
 
-public enum UIState
-{
-    NPCChat
-}
 
 public class UIManager : MonoBehaviour
 {
-    NPCChatUI npcChatUI;
+    [SerializeField] private TextMeshProUGUI Count;
+    [SerializeField] private Slider hpSlider;
 
-    private UIState currentState;
-
+    GameManager gameManager;
     private void Awake()
     {
-        npcChatUI = GetComponentInChildren<NPCChatUI>(true);
-        npcChatUI.Init(this);
+        this.gameManager = GameManager.Instance;
     }
 
-    public void ChangeState(UIState state)
+    public void ChangeKillCount(int killCount)
     {
+        Count.text = killCount.ToString();
+    }
 
+    public void UpdateHPSlider(float percentage)
+    {
+        hpSlider.value = percentage;
     }
 }

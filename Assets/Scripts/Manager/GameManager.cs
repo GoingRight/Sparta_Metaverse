@@ -10,8 +10,12 @@ public class GameManager : MonoBehaviour
         get { return instance; }
     }
 
-    private PlayerController player;
+    public PlayerController player { get; private set; }
+    public ResourceController _playerResource;
+    private EnemyManager enemyManager;
+    private UIManager uiManager;
     private int killCount = 0;
+    private int BestScore = 0;
     public bool isGameOver = false;
     public int KillCount { get { return killCount; } set { killCount = value;} }
 
@@ -30,11 +34,35 @@ public class GameManager : MonoBehaviour
         }
         DontDestroyOnLoad(gameObject);
         player = FindObjectOfType<PlayerController>();
+
+        Debug.Log(player.name);
+        //enemyManager = FindObjectOfType<EnemyManager>();
+        //enemyManager.Init(this);
+        uiManager = FindObjectOfType<UIManager>();
+
+        _playerResource = player.GetComponent<ResourceController>();
+        _playerResource.RemoveHealthChangeEvent(uiManager.UpdateHPSlider);
+        _playerResource.AddHealthChageEvent(uiManager.UpdateHPSlider);
+    }
+
+    public void KillCountPlus()
+    {
+        KillCount++;
+        uiManager.ChangeKillCount(KillCount);
     }
 
     public void GameOver()
     {
         Time.timeScale = 0f;
         isGameOver = true;
+        CheckBestScore();
+    }
+
+    public void CheckBestScore()
+    {
+        if (KillCount > BestScore)
+        {
+            BestScore = KillCount;
+        }
     }
 }

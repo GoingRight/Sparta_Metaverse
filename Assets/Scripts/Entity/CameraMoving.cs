@@ -27,7 +27,7 @@ public class CameraMoving : MonoBehaviour
     {
         if(gameManager.KillCount > 0)
         {
-            moveSpeed = 0.002f + ((gameManager.KillCount / 5) * 0.01f);
+            moveSpeed = 0.002f + ((gameManager.KillCount / 10) * 0.001f);
         }
         else
         {

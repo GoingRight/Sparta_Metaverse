@@ -12,13 +12,16 @@ public class GameOverBar : MonoBehaviour
             Debug.Log("Game over");
             GameManager.Instance.GameOver();
         }
+        else if(collision.gameObject.name == "Goblin" ||  collision.gameObject.name == "Orc")
+        {
+            Destroy(collision.gameObject);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.name == "CheckCollisionBlock")
+        if(collision.gameObject.name == "CheckCollisionBlock")//타일맵을 루프시키는 로직
         {
-            Debug.Log("블록과 닿았습니다.");
             GameObject tileMap = collision.transform.parent.gameObject;
             Vector2 pos = tileMap.transform.position;
             pos.x += 104;
