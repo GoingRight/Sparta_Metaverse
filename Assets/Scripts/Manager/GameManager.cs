@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -56,6 +57,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0f;
         isGameOver = true;
         CheckBestScore();
+        uiManager.SetGameOverUI();
     }
 
     public void CheckBestScore()
@@ -64,5 +66,10 @@ public class GameManager : MonoBehaviour
         {
             BestScore = KillCount;
         }
+    }
+
+    public void GoToMainScene()
+    {
+        SceneManager.LoadScene(0);
     }
 }

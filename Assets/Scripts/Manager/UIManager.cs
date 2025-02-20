@@ -10,6 +10,7 @@ public class UIManager : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI Count;
     [SerializeField] private Slider hpSlider;
+    [SerializeField]private GameObject GameOverUI;
 
     GameManager gameManager;
     private void Awake()
@@ -25,5 +26,10 @@ public class UIManager : MonoBehaviour
     public void UpdateHPSlider(float percentage)
     {
         hpSlider.value = percentage;
+    }
+
+    public void SetGameOverUI()
+    {
+        GameOverUI.SetActive(true);
     }
 }
