@@ -2383,6 +2383,7 @@ GameObject:
   - component: {fileID: 357708252}
   - component: {fileID: 357708253}
   - component: {fileID: 357708254}
+  - component: {fileID: 357708255}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -2447,6 +2448,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterRender: {fileID: 1840879892}
   weaponPivot: {fileID: 0}
+  WeaponPrefab: {fileID: 0}
 --- !u!114 &357708252
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2549,6 +2551,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 4, y: 4}
   m_EdgeRadius: 0
+--- !u!114 &357708255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 357708248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3634660cbbaf9b41ad4d1b91e535b77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 10
+  speed: 3
 --- !u!1 &360933234
 GameObject:
   m_ObjectHideFlags: 0
@@ -3792,6 +3808,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb16d079fd14cfe41b7aea72f9ac9466, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerResource: {fileID: 0}
+  isGameOver: 0
 --- !u!4 &1509690511
 Transform:
   m_ObjectHideFlags: 0
