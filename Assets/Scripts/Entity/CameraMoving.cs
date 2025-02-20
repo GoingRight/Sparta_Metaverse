@@ -17,14 +17,17 @@ public class CameraMoving : MonoBehaviour
     }
     private void LateUpdate()
     {
-        Move();
+        if(gameManager.isGameOver == false)
+        {
+            Move(); 
+        }
     }
 
     private void Move()
     {
         if(gameManager.KillCount > 0)
         {
-            moveSpeed = 0.02f + ((gameManager.KillCount / 5) * 0.01f);
+            moveSpeed = 0.002f + ((gameManager.KillCount / 5) * 0.01f);
         }
         else
         {

@@ -20,15 +20,19 @@ public class BaseController : MonoBehaviour
     protected WeaponHandler weaponHandler;
 
     protected bool isAttacking;
+    private float timeSinceLastAttack = float.MaxValue;
 
     protected AnimationHandler animationHandler;
+
+    protected StatHandler statHandler;
 
     protected virtual void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
         animationHandler = GetComponent<AnimationHandler>();
+        statHandler = GetComponent<StatHandler>();
 
-        if(SceneManager.GetActiveScene().buildIndex == 1)//1 == MiniGameScene
+        if (SceneManager.GetActiveScene().buildIndex == 1)//1 == MiniGameScene
         {
             if (WeaponPrefab != null)
             {
@@ -38,7 +42,7 @@ public class BaseController : MonoBehaviour
             {
                 Debug.LogWarning("WaponPrefab is NULL");
             }
-        } 
+        }
 
     }
 
@@ -55,19 +59,19 @@ public class BaseController : MonoBehaviour
     protected virtual void FixedUpdate()
     {
 
-            Movement(movementDirection);
-
+        Movement(movementDirection);
+        HandleAttackDelay();
 
     }
 
     protected virtual void HandleAction()
     {
-        
+
     }
 
     private void Movement(Vector2 direction)//direction에 movementDirection이 들어감
     {
-        direction = direction * 5;//나중에 스텟 스피드로 대체
+        direction = direction * statHandler.Speed;//나중에 스텟 스피드로 대체
 
         _rigidbody.velocity = direction;
         animationHandler.Move(direction);
@@ -79,5 +83,54 @@ public class BaseController : MonoBehaviour
         bool isLeft = Mathf.Abs(theta) > 90f;
 
         characterRender.flipX = isLeft;
+
+        if (weaponPivot != null)
+        {
+            weaponPivot.rotation = Quaternion.Euler(0f, 0f, theta);
+        }
+        weaponHandler?.Rotate(isLeft);
+    }
+
+    private void HandleAttackDelay()
+    {
+        if (weaponHandler == null)
+            return;
+        if (timeSinceLastAttack < weaponHandler.Delay)
+        {
+            timeSinceLastAttack += Time.deltaTime;
+        }
+
+        if (isAttacking && timeSinceLastAttack > weaponHandler.Delay)
+        {
+            timeSinceLastAttack = 0f;
+            Attack();
+        }
+    }
+
+    protected virtual void Attack()
+    {
+        if (lookDirection != Vector2.zero)
+        {
+            weaponHandler?.Attack();
+        }
+    }
+
+    public virtual void Death()
+    {
+        _rigidbody.velocity = Vector3.zero;
+
+        foreach (SpriteRenderer renderer in transform.GetComponentsInChildren<SpriteRenderer>())
+        {
+            Color color = renderer.color;
+            color.a = 0.3f;
+            renderer.color = color;
+        }
+
+        foreach (Behaviour component in transform.GetComponentsInChildren<Behaviour>())
+        {
+            component.enabled = false;
+        }
+
+        Destroy(gameObject, 2f);
     }
 }

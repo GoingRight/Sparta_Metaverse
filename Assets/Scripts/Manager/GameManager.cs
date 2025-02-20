@@ -9,7 +9,10 @@ public class GameManager : MonoBehaviour
     {
         get { return instance; }
     }
+
+    private PlayerController player;
     private int killCount = 0;
+    public bool isGameOver = false;
     public int KillCount { get { return killCount; } set { killCount = value;} }
 
     private void Awake()
@@ -26,10 +29,12 @@ public class GameManager : MonoBehaviour
             }
         }
         DontDestroyOnLoad(gameObject);
+        player = FindObjectOfType<PlayerController>();
     }
 
     public void GameOver()
     {
-
+        Time.timeScale = 0f;
+        isGameOver = true;
     }
 }
